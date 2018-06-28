@@ -1,3 +1,4 @@
+# ![alt text](https://github.com/jacksonporter/EM/raw/master/res/smallogo_clear.png)
 # EM
 EM - Event Management &amp; Reservations
 
