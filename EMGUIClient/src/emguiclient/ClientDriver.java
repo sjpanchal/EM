@@ -38,6 +38,11 @@ public class ClientDriver {
 			sIn.close();
 			socket.close();
 			
+			
+			
+			System.out.println("\n\n%%% CLOSING EM CLIENT APP %%%");
+			System.exit(0);
+			
 		} catch (UnknownHostException e) {
 			System.err.println("Server not recongized - couldn't connect.");
 			e.printStackTrace();
