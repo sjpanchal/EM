@@ -76,7 +76,6 @@ public class ServerDriver {
 			while(!input.equals("q")) {
 				System.out.print("\nWelcome to the EM Server Application. Choose an option: "
 						+ "\n(n) Start Network Program"
-						+ "\n(g) Display ALL group information"
 						+ "\n(u) Display command line usage"
 						+ "\n(q) QUIT server application"
 						+ "\nOPTION: ");

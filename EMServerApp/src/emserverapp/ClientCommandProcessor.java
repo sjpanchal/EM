@@ -48,6 +48,8 @@ public class ClientCommandProcessor implements Runnable{
 	
 	@Override
 	public void run() {
+		System.out.println("new thread spawned");
+		
 		//Create a new connection!
 		try {
 			ClientConnection clientConnection = new ClientConnection();
