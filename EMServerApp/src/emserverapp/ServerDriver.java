@@ -19,25 +19,11 @@ import java.util.Scanner;
 public class ServerDriver {
 	static Scanner scanner;
 	
-	//SQL Variables
-	static Connection conn;
-	static Statement statement;
-	static PreparedStatement preparedStatement;
-	static ResultSet resultSet;
 	
-	//Database variables
-	static String host = "jacksonportermysqldb.ck9qmzz9yyn6.us-west-2.rds.amazonaws.com";
-	static String user = "emserverapp";
-	static String password = "IluvEM2018";
 	
-	//Networking (TCP) variables
-	static int socketNumber = 2018;
-	static ServerSocket serverSocket;
-	static Socket socket;
-	static InputStream sIn;
-	static DataInputStream socketDIS;
-	static OutputStream sOut;
-	static DataOutputStream socketDOS;
+	
+	
+
 	
 	public static void main(String[] args) {		
 		//Check to see if there are arguments!
@@ -63,15 +49,11 @@ public class ServerDriver {
 							case "n":
 								startNetworkProgram();
 								break;
-							case "g":
-								getAllGroupInformation();
-								break;
 							case "u":
 								System.out.println("USAGE: "
 										+ "java -jar EMServerApp.jar -<arguments>\n\n"
 										+ "ARGUMENTS:\n"
 										+ "(n) Start Network Program\n"
-										+ "(g) Retrieve ALL Group Information\n"
 										+ "(u) Get usage\n"
 										+ "\nArguments for EM Server App are issued in sequential order.\n");
 								break;
@@ -105,15 +87,11 @@ public class ServerDriver {
 					case "n":
 						startNetworkProgram();
 						break;
-					case "g":
-						getAllGroupInformation();
-						break;
 					case "u":
 						System.out.println("USAGE: "
 								+ "java -jar EMServerApp.jar -<arguments>\n\n"
 								+ "ARGUMENTS:\n"
 								+ "(n) Start Network Program\n"
-								+ "(g) Retrieve ALL Group Information\n"
 								+ "(u) Get usage\n"
 								+ "\nArguments for EM Server App are issued in sequential order.\n");
 						break;
@@ -190,47 +168,14 @@ public class ServerDriver {
 	
 	
 	
-	private static void startNetworkProgram() {
-		try {
-			//Database connection
-			System.out.println("CONNECTING TO DB");
-			conn = DriverManager.getConnection("jdbc:mysql://" + host + "/emdb", user, password);
-			
-			//Client connection
-			System.out.println("Waiting for connection");
-			
-			serverSocket = new ServerSocket(socketNumber);
-			socket = serverSocket.accept();
-			
-			//Input
-			sIn = socket.getInputStream();
-			socketDIS = new DataInputStream(sIn);
-			
-			//Output
-			sOut = socket.getOutputStream();
-			socketDOS = new DataOutputStream(sOut);
-			
-			System.out.println("CONNECTION RECIEVED");
-			
-			socketDOS.writeUTF("Sorry, the network app server is in development. Check back later.");
-			
-			socketDOS.close();
-			sOut.close();
-			socketDIS.close();
-			sIn.close();
-			socket.close();
-			serverSocket.close();
-			conn.close();
-			
-		} catch (SQLException e) {
-			System.out.println("Couldn't make connection or SQL query/command error.");
-			e.printStackTrace();
-			System.exit(1);
-		} catch (IOException e) {
-			System.out.println("I/O or Networking Error.");
-			e.printStackTrace();
-			System.exit(1);
-		}
+	private static void startNetworkProgram() {	
+		ClientCommandProcessor ccp = new ClientCommandProcessor();
+
+		//Add support for multiple clients in the future.
+		
+		//Connect a single client
+		Thread client1 = new Thread(ccp);
+		client1.start();
 	}
 	
 	
