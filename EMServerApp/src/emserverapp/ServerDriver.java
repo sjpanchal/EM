@@ -109,7 +109,7 @@ public class ServerDriver {
 	}
 	
 
-	public static void getAllGroupInformation() {
+/*	public static void getAllGroupInformation() {
 		System.out.println("CONNECTING TO DB");
 		try {
 			//Class.forName("com.mysql.jdbc.Driver");
@@ -141,9 +141,9 @@ public class ServerDriver {
 				System.out.println(groups.get(i).toString());
 			}
 			
-		/*} catch (ClassNotFoundException e) {
+		} catch (ClassNotFoundException e) {
 			System.err.println("Couldn't detect/find driver.");
-			e.printStackTrace();*/
+			e.printStackTrace();
 		} catch (SQLException e) {
 			System.out.println("Couldn't make connection or SQL query/command error.");
 			e.printStackTrace();
@@ -151,7 +151,7 @@ public class ServerDriver {
 		}
 	}
 	
-	
+	*/
 	
 	
 	
@@ -174,7 +174,7 @@ public class ServerDriver {
 		//Add support for multiple clients in the future.
 		
 		//Connect a single client
-		Thread client1 = new Thread(ccp);
+		Thread 	client1 = new Thread(ccp);
 		client1.start();
 	}
 	
