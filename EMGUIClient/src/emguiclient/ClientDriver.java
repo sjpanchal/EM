@@ -88,6 +88,8 @@ public class ClientDriver {
 	}
 	
 	public static void processServerCommand(String command) {
+		System.err.println("Attempting to perform " + command);
+		
 		//Command processor:
 		String[] commandSplit = command.split(";");
 		if(commandSplit.length < 3) {

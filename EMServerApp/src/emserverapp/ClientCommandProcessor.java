@@ -54,7 +54,7 @@ public class ClientCommandProcessor implements Runnable{
 		//Create a new connection!
 		try {
 			ClientConnection clientConnection = new ClientConnection();
-			clientConnection.writeToClient("g;b;Please login to continue.");
+			clientConnection.writeToClient("g;s;b?Please login to continue.");
 			terminate = false;
 			
 			while(!terminate) {
