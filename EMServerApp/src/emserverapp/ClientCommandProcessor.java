@@ -130,7 +130,7 @@ public class ClientCommandProcessor implements Runnable{
 							resultSet.getString(2);
 							
 							if(!(subCommandSplit[2].equals(resultSet.getString(2)))) {
-								return "g;f;" + subCommandSplit[0] + "?" + subCommandSplit[1] + "?Couldn't login user, USER DOESN'T EXCIST OR IS INACTIVE";
+								return "g;f;" + subCommandSplit[0] + "?" + subCommandSplit[1] + "?Couldn't login user, USER PASSWORD INCORRECT";
 							}
 							else {
 								currentUser = new User(resultSet.getString(1), resultSet.getString(3), resultSet.getString(4), resultSet.getString(5), 

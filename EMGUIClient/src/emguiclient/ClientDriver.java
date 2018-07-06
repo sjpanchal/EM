@@ -77,29 +77,29 @@ public class ClientDriver {
 			System.exit(0);
 			
 		} catch (UnknownHostException e) {
-			System.err.println("Server not recongized - couldn't connect.");
+			System.out.println("ERR" + "Server not recongized - couldn't connect.");
 			e.printStackTrace();
 			System.exit(1);
 		} catch (IOException e) {
-			System.err.println("Couldn't connect OR I/O Error");
+			System.out.println("ERR" + "Couldn't connect OR I/O Error");
 			e.printStackTrace();
 			System.exit(1);
 		}
 	}
 	
 	public static void processServerCommand(String command) {
-		System.err.println("Attempting to perform " + command);
+		System.out.println("ERR" + "Attempting to perform " + command);
 		
 		//Command processor:
 		String[] commandSplit = command.split(";");
 		if(commandSplit.length < 3) {
-			System.err.println("Message from server was invalid. Closing program.");
+			System.out.println("ERR" + "Message from server was invalid. Closing program.");
 			System.exit(1);
 		}
 		else {
 			switch (commandSplit[0]) {
 				case "g":
-					System.err.println("General operation selected.");
+					System.out.println("ERR" + "General operation selected.");
 					
 					String[] subCommandSplit = commandSplit[2].split("\\?");
 					
@@ -114,7 +114,7 @@ public class ClientDriver {
 								System.exit(1);
 							}
 							else {
-								System.err.println("Incorrect command syntax (s/f). Closing program.");
+								System.out.println("ERR" + "Incorrect command syntax (s/f). Closing program.");
 								System.exit(1);
 							}
 							break;
@@ -126,15 +126,15 @@ public class ClientDriver {
 									System.out.println("Logged in user - retrieved user information.");
 								} catch (UserOperationException e) {
 									e.printStackTrace();
-									System.err.println(e.getMessage());
+									System.out.println("ERR" + e.getMessage());
 									System.exit(1);
 								}
 							}
 							else if(commandSplit[1].equals("f")) {
-								System.err.println("Error for: " + subCommandSplit[1] + ": " + subCommandSplit[2]);
+								System.out.println("ERR" + "Error for: " + subCommandSplit[1] + ": " + subCommandSplit[2]);
 							}
 							else {
-								System.err.println("Incorrect command syntax (s/f). Closing program.");
+								System.out.println("ERR" + "Incorrect command syntax (s/f). Closing program.");
 								System.exit(1);
 							}
 							break;
@@ -150,10 +150,10 @@ public class ClientDriver {
 								System.out.println("Created user/logged in: " + currentUser.getUsername());
 							}
 							else if(commandSplit[1].equals("f")) {
-								System.err.println("Error : " + subCommandSplit[1]);
+								System.out.println("ERR" + "Error : " + subCommandSplit[1]);
 							}
 							else {
-								System.err.println("Incorrect command syntax (s/f). Closing program.");
+								System.out.println("ERR" + "Incorrect command syntax (s/f). Closing program.");
 								System.exit(1);
 							}
 							break;
@@ -164,16 +164,16 @@ public class ClientDriver {
 									currentUser.updateUserInfo(subCommandSplit);
 								} catch (UserOperationException e) {
 									e.printStackTrace();
-									System.err.println(e.getMessage());
+									System.out.println("ERR" + e.getMessage());
 									System.exit(1);
 								}
 								System.out.println("Retrieved updated user information.");
 							}
 							else if(commandSplit[1].equals("f")) {
-								System.err.println("Error updating user: " + subCommandSplit[1] + ": " + subCommandSplit[2]);
+								System.out.println("ERR" + "Error updating user: " + subCommandSplit[1] + ": " + subCommandSplit[2]);
 							}
 							else {
-								System.err.println("Incorrect command syntax (s/f). Closing program.");
+								System.out.println("ERR" + "Incorrect command syntax (s/f). Closing program.");
 								System.exit(1);
 							}
 							break;
@@ -182,10 +182,10 @@ public class ClientDriver {
 								System.out.println("Changed password for user: " + subCommandSplit[1]);
 							}
 							else if(commandSplit[1].equals("f")) {
-								System.err.println("Error changing password for: " + subCommandSplit[1] + ": " + subCommandSplit[2]);
+								System.out.println("ERR" + "Error changing password for: " + subCommandSplit[1] + ": " + subCommandSplit[2]);
 							}
 							else {
-								System.err.println("Incorrect command syntax (s/f). Closing program.");
+								System.out.println("ERR" + "Incorrect command syntax (s/f). Closing program.");
 								System.exit(1);
 							}
 							break;
@@ -194,10 +194,10 @@ public class ClientDriver {
 								System.out.println("Changed password for user (brute force): " + subCommandSplit[1]);
 							}
 							else if(commandSplit[1].equals("f")) {
-								System.err.println("Error changing password for (brute force): " + subCommandSplit[1] + ": " + subCommandSplit[2]);
+								System.out.println("ERR" + "Error changing password for (brute force): " + subCommandSplit[1] + ": " + subCommandSplit[2]);
 							}
 							else {
-								System.err.println("Incorrect command syntax (s/f). Closing program.");
+								System.out.println("ERR" + "Incorrect command syntax (s/f). Closing program.");
 								System.exit(1);
 							}
 							break;
@@ -206,20 +206,20 @@ public class ClientDriver {
 								System.out.println("DISABLED user: " + subCommandSplit[1]);
 							}
 							else if(commandSplit[1].equals("f")) {
-								System.err.println("Error disabling user: " + subCommandSplit[1] + ": " + subCommandSplit[2]);
+								System.out.println("ERR" + "Error disabling user: " + subCommandSplit[1] + ": " + subCommandSplit[2]);
 							}
 							else {
-								System.err.println("Incorrect command syntax (s/f). Closing program.");
+								System.out.println("ERR" + "Incorrect command syntax (s/f). Closing program.");
 								System.exit(1);
 							}
 							break;
 						default:
-							System.err.println("Unknown component subcommand. Closing program.");
+							System.out.println("ERR" + "Unknown component subcommand. Closing program.");
 							System.exit(1);
 					}
 					break;
 				default:
-					System.err.println("Unknown component. Closing program.");
+					System.out.println("ERR" + "Unknown component. Closing program.");
 					System.exit(1);
 			}
 		}
