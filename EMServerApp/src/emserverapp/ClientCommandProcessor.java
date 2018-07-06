@@ -81,6 +81,8 @@ public class ClientCommandProcessor implements Runnable{
 
 
 	private String processClientRequest(String message) throws SQLException, MultipleUsersException {
+		System.err.println("ATTEMPTING TO PROCESS THE REQUST: " + message);
+		
 		//DB variables
 		Statement statement;
 		PreparedStatement preparedStatement;
