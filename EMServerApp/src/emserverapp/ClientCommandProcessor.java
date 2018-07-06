@@ -120,7 +120,7 @@ public class ClientCommandProcessor implements Runnable{
 							System.err.println("GOT RESULTS");
 							
 							if(resultSet.getRow() < 1) {
-								return "g;f;" + subCommandSplit[0] + "?" + subCommandSplit[1] + "?Couldn't login user, USER DOESN'T EXCIST or IS INACTIVE";
+								//return "g;f;" + subCommandSplit[0] + "?" + subCommandSplit[1] + "?Couldn't login user, USER DOESN'T EXCIST or IS INACTIVE";
 							}
 							else if(resultSet.getRow() > 1) {
 								throw new MultipleUsersException("There are multiple users with this username that are active. We have a problem.");								
