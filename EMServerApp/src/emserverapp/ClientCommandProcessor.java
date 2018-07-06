@@ -115,7 +115,9 @@ public class ClientCommandProcessor implements Runnable{
 									+ " emdb.'User'.isGroupContact,	emdb.'User'.isOutsideVendor FROM emdb.'User'"
 									+ " WHERE username = '?' AND active = 1;");
 							preparedStatement.setString(1, subCommandSplit[1]);
+							System.err.println("ABOUT TO QUERY: " + preparedStatement.toString());
 							resultSet = preparedStatement.executeQuery();
+							System.err.println("GOT RESULTS");
 							
 							if(resultSet.getRow() < 1) {
 								return "g:f:" + subCommandSplit[0] + "?" + subCommandSplit[1] + "?Couldn't login user, USER DOESN'T EXCIST/IS INACTIVE";

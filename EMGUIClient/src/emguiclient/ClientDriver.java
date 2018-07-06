@@ -217,6 +217,7 @@ public class ClientDriver {
 							System.err.println("Unknown component subcommand. Closing program.");
 							System.exit(1);
 					}
+					break;
 				default:
 					System.err.println("Unknown component. Closing program.");
 					System.exit(1);
