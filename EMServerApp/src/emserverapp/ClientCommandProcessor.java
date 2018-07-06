@@ -120,7 +120,7 @@ public class ClientCommandProcessor implements Runnable{
 							System.err.println("GOT RESULTS");
 							
 							if(resultSet.getRow() < 1) {
-								return "g:f:" + subCommandSplit[0] + "?" + subCommandSplit[1] + "?Couldn't login user, USER DOESN'T EXCIST/IS INACTIVE";
+								return "g;f;" + subCommandSplit[0] + "?" + subCommandSplit[1] + "?Couldn't login user, USER DOESN'T EXCIST/IS INACTIVE";
 							}
 							else if(resultSet.getRow() > 1) {
 								throw new MultipleUsersException("There are multiple users with this username that are active. We have a problem.");								
@@ -130,7 +130,7 @@ public class ClientCommandProcessor implements Runnable{
 							resultSet.getString(2);
 							
 							if(!(subCommandSplit[2].equals(resultSet.getString(2)))) {
-								return "g:f:" + subCommandSplit[0] + "?" + subCommandSplit[1] + "?Couldn't login user, USER DOESN'T EXCIST OR IS INACTIVE";
+								return "g;f;" + subCommandSplit[0] + "?" + subCommandSplit[1] + "?Couldn't login user, USER DOESN'T EXCIST OR IS INACTIVE";
 							}
 							else {
 								currentUser = new User(resultSet.getString(1), resultSet.getString(3), resultSet.getString(4), resultSet.getString(5), 
@@ -138,7 +138,7 @@ public class ClientCommandProcessor implements Runnable{
 										Boolean.parseBoolean(resultSet.getString(9)), Boolean.parseBoolean(resultSet.getString(10)), 
 										Boolean.parseBoolean(resultSet.getString(11)), Boolean.parseBoolean(resultSet.getString(12)));
 								
-								return "g:s:" + subCommandSplit[0] + currentUser.userInfo();
+								return "g;s;" + subCommandSplit[0] + currentUser.userInfo();
 							}
 							
 							
@@ -166,11 +166,11 @@ public class ClientCommandProcessor implements Runnable{
 							
 						default:
 							System.err.println("Unknown component subcommand. Closing program.");
-							return "g:f:b?Subcommand not supported.";
+							return "g;f;b?Subcommand not supported.";
 					}
 				default:
 					System.err.println("Unknown component. Closing program.");
-					return "g:f:b?Component not supported.";
+					return "g;f;b?Component not supported.";
 			}
 		}
 		return "g:f:b?A serious error occured.";
