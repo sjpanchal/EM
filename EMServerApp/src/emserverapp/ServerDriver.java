@@ -20,11 +20,6 @@ public class ServerDriver {
 	static Scanner scanner;
 	
 	
-	
-	
-	
-
-	
 	public static void main(String[] args) {		
 		//Check to see if there are arguments!
 		if(args.length > 0) {
@@ -47,7 +42,13 @@ public class ServerDriver {
 							
 						switch (input) {
 							case "n":
-								startNetworkProgram();
+								try {
+									startNetworkProgram();
+									System.out.println("Starting network program. If you selected other arguments, they will not be excuted until the network program is terminated.");
+								} catch (InterruptedException e) {
+									System.err.println("The network thread had a problem. Closing EM Server App.");
+									System.exit(1);
+								}
 								break;
 							case "u":
 								System.out.println("USAGE: "
@@ -84,7 +85,13 @@ public class ServerDriver {
 				
 				switch (input) {
 					case "n":
-						startNetworkProgram();
+						try {
+							startNetworkProgram();
+							System.out.println("Starting network program...");
+						} catch (InterruptedException e) {
+							System.err.println("The network thread had a problem. Closing EM Server App.");
+							System.exit(1);
+						}
 						break;
 					case "u":
 						System.out.println("USAGE: "
@@ -153,21 +160,7 @@ public class ServerDriver {
 	*/
 	
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	private static void startNetworkProgram() {	
+	private static void startNetworkProgram() throws InterruptedException {	
 		ClientCommandProcessor ccp = new ClientCommandProcessor();
 
 		//Add support for multiple clients in the future.
@@ -175,6 +168,8 @@ public class ServerDriver {
 		//Connect a single client
 		Thread 	client1 = new Thread(ccp);
 		client1.start();
+		
+		client1.join();
 	}
 	
 	
