@@ -54,6 +54,26 @@ public class User {
 		this.isOutsideVendor = false;
 	}
 
+	public User(String[] subCommandSplit) throws UserOperationException {
+		if(subCommandSplit.length != 12) {
+			throw new UserOperationException("Argument list too short.");
+		}
+		else {
+			this.serverId = -1;
+			this.setUsername(subCommandSplit[1]);
+			this.setFirstname(subCommandSplit[2]);
+			this.setLastname(subCommandSplit[3]);
+			this.setEmail(subCommandSplit[4]);
+			this.setPhonenumber(subCommandSplit[5]);
+			this.setAdmin(Boolean.parseBoolean(subCommandSplit[6]));
+			this.setManager(Boolean.parseBoolean(subCommandSplit[7]));
+			this.setEmployee(Boolean.parseBoolean(subCommandSplit[8]));
+			this.setOutsideManager(Boolean.parseBoolean(subCommandSplit[9]));
+			this.setGroupContact(Boolean.parseBoolean(subCommandSplit[10]));
+			this.setOutsideVendor(Boolean.parseBoolean(subCommandSplit[11]));
+		}
+	}
+
 	public int getServerId() {
 		return serverId;
 	}
@@ -184,6 +204,7 @@ public class User {
 		while(hashtext.length() < 32) {
 			hashtext = "0" + hashtext;
 		}
+		
 		
 		return hashtext;
 	}
