@@ -109,10 +109,10 @@ public class ClientCommandProcessor implements Runnable{
 						//Login user
 						case "i":
 							//Check to see if user can be logged in
-							preparedStatement = conn.prepareStatement("SELECT emdb.'User'.username, emdb.'User'.password, emdb.'User'.firstname,"
-									+ " emdb.'User'.lastname, emdb.'User'.email, emdb.'User'.phonenumber, emdb.'User'.isAdmin,"
-									+ " emdb.'User'.isManager, emdb.'User'.isEmployee, emdb.'User'.isOutsideManager,"
-									+ " emdb.'User'.isGroupContact,	emdb.'User'.isOutsideVendor FROM emdb.'User'"
+							preparedStatement = conn.prepareStatement("SELECT emdb.`User`.username, emdb.`User`.password, emdb.`User`.firstname,"
+									+ " emdb.`User`.lastname, emdb.`User`.email, emdb.`User`.phonenumber, emdb.`User`.isAdmin,"
+									+ " emdb.`User`.isManager, emdb.`User`.isEmployee, emdb.`User`.isOutsideManager,"
+									+ " emdb.`User`.isGroupContact,	emdb.`User`.isOutsideVendor FROM emdb.`User`"
 									+ " WHERE username=? AND active = 1;");
 							preparedStatement.setString(1, subCommandSplit[1]);
 							System.err.println("ABOUT TO QUERY: " + preparedStatement.toString());
