@@ -166,7 +166,7 @@ public class ServerDriver {
 		//Add support for multiple clients in the future.
 		
 		//Connect a single client
-		Thread 	client1 = new Thread(ccp);
+		ClientThread client1 = new ClientThread(ccp);
 		client1.start();
 		
 		client1.join();

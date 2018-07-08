@@ -4,11 +4,11 @@ import java.io.IOException;
 
 public class ClientThread extends Thread {
 	private ClientConnection clientConnection;
-	
-	public ClientThread() {
-		
+
+	public ClientThread(ClientCommandProcessor ccp) {
+		super(ccp);
 	}
-	
+
 	@Override
 	public void interrupt() {
 		try {
