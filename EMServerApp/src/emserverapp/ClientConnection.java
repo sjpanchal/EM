@@ -8,9 +8,14 @@ import java.io.OutputStream;
 import java.net.ServerSocket;
 import java.net.Socket;
 
+import javax.net.ssl.SSLServerSocket;
+import javax.net.ssl.SSLSocket;
+
 public class ClientConnection {
-	ServerSocket generalServerSocket;
-	Socket generalSocket;
+	/*ServerSocket generalServerSocket;*/
+	SSLServerSocket generalSSLServerSocket;
+	/*Socket generalSocket;*/
+	SSLSocket generalSSLSocket;
 	OutputStream generalSOut;
 	DataOutputStream generalSocketDOS;
 	InputStream generalSIn;
@@ -18,14 +23,15 @@ public class ClientConnection {
 	String name;
 	
 	public ClientConnection() throws IOException {
-		generalServerSocket = ClientCommandProcessor.generalServerSocket;
-		generalSocket = generalServerSocket.accept();
-		generalSOut = generalSocket.getOutputStream();
+		/*generalServerSocket = ClientCommandProcessor.generalServerSocket;*/
+		generalSSLServerSocket = ClientCommandProcessor.generalSSLServerSocket;
+		generalSSLSocket = (SSLSocket) generalSSLServerSocket.accept();
+		generalSOut = generalSSLSocket.getOutputStream();
 		generalSocketDOS = new DataOutputStream(generalSOut);
-		generalSIn = generalSocket.getInputStream();
+		generalSIn = generalSSLSocket.getInputStream();
 		generalSocketDIS = new DataInputStream(generalSIn);
 		
-		System.out.println("Client connected: " + generalSocket.getInetAddress().toString());		
+		System.out.println("Client connected: " + generalSSLSocket.getInetAddress().toString());		
 	}
 	
 	public void writeToClient(String message) throws IOException {
@@ -41,8 +47,8 @@ public class ClientConnection {
 		this.generalSocketDOS.close();
 		this.generalSIn.close();;
 		this.generalSOut.close();
-		this.generalSocket.close();
-		this.generalServerSocket.close();
+		this.generalSSLSocket.close();
+		this.generalSSLServerSocket.close();
 	}
 	
 	public void setName(String n) {

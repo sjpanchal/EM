@@ -6,30 +6,50 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.net.InetAddress;
-import java.net.Socket;
+/*import java.net.Socket;*/
 import java.net.UnknownHostException;
+import java.security.Security;
 import java.util.Scanner;
 
+import javax.net.ssl.SSLSocket;
+import javax.net.ssl.SSLSocketFactory;
+
+import com.sun.net.ssl.internal.ssl.Provider;
+
 public class ClientDriver {
-	static InetAddress serverHost;
-	static int serverPortNumber = 2018;
-	static Socket socket;
-	static InputStream sIn;
-	static DataInputStream socketDIS;
-	static OutputStream sOut;
-	static DataOutputStream socketDOS;
-	static User currentUser;
-	static boolean terminate;
+	private static InetAddress serverHost;
+	private static int serverPortNumber = 2018;
+	private static SSLSocketFactory sslServerSocketFactory;
+	private static SSLSocket sslSocket;
+	/*private static Socket socket;*/
+	private static InputStream sIn;
+	private static DataInputStream socketDIS;
+	private static OutputStream sOut;
+	private static DataOutputStream socketDOS;
+	private static User currentUser;
+	private static boolean terminate;
 	
 	public static void main(String[] args) {
 		Scanner input = new Scanner(System.in);
 		
 		try {
+			Security.addProvider(new Provider());
+
+            System.setProperty("javax.net.ssl.trustStore", "jts/emappts.jts");
+            System.setProperty("javax.net.ssl.trustStorePassword", "843emappusa13<\";");
+
+            //Show details for handshake
+            System.setProperty("javax.net.debug", "all");
+			
+            			
 			serverHost = InetAddress.getByName("em.racereg.run");
-			socket = new Socket(serverHost, serverPortNumber);
-			sIn = socket.getInputStream();
+			/*socket = new Socket(serverHost, serverPortNumber);*/
+			sslServerSocketFactory = (SSLSocketFactory) SSLSocketFactory.getDefault();
+            sslSocket = (SSLSocket) sslServerSocketFactory.createSocket(serverHost, serverPortNumber);
+            
+			sIn = sslSocket.getInputStream();
 			socketDIS = new DataInputStream(sIn);
-			sOut = socket.getOutputStream();
+			sOut = sslSocket.getOutputStream();
 			socketDOS = new DataOutputStream(sOut);
 			terminate = false;
 			
@@ -69,7 +89,8 @@ public class ClientDriver {
 			sOut.close();
 			socketDIS.close();
 			sIn.close();
-			socket.close();
+			/*socket.close();*/
+			sslSocket.close();
 			
 			
 			

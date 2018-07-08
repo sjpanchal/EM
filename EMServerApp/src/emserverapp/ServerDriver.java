@@ -1,20 +1,9 @@
 package emserverapp;
 
-import java.io.DataInputStream;
-import java.io.DataOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
-import java.net.ServerSocket;
-import java.net.Socket;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
-import java.util.ArrayList;
 import java.util.Scanner;
+
+import java.security.Security;
+import com.sun.net.ssl.internal.ssl.Provider;
 
 public class ServerDriver {
 	static Scanner scanner;
@@ -160,7 +149,14 @@ public class ServerDriver {
 	*/
 	
 	
-	private static void startNetworkProgram() throws InterruptedException {	
+	private static void startNetworkProgram() throws InterruptedException {
+		//Prep system to use keystore/ssl
+		//Adds the Java Secure Socket Extension (JSSE) provider - provides SSL and TLS protocols with functionality for data encrpytion, server auth, message integrity, and client auth.
+        Security.addProvider(new Provider());
+
+        System.setProperty("javax.net.ssl.keyStore", "emapp.jks");
+        System.setProperty("javax.net.ssl.keyStorePassword", "18emapps**1997");
+		
 		ClientCommandProcessor ccp = new ClientCommandProcessor();
 
 		//Add support for multiple clients in the future.

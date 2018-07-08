@@ -9,12 +9,16 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
+import javax.net.ssl.SSLServerSocket;
+import javax.net.ssl.SSLServerSocketFactory;
+
 import emserverapp.User;
 import emserverapp.UserOperationException;
 
 public class ClientCommandProcessor implements Runnable{
 	static final int APP_SERVER_PORT = 2018;
-	static final ServerSocket generalServerSocket;
+	/*static final ServerSocket generalServerSocket;*/
+	static final SSLServerSocket generalSSLServerSocket;
 	
 	//Database
 	static String host = "jacksonportermysqldb.ck9qmzz9yyn6.us-west-2.rds.amazonaws.com";
@@ -23,7 +27,7 @@ public class ClientCommandProcessor implements Runnable{
 	//SQL Variables
 	static Connection conn;
 		
-	static {
+	/*static {
 		ServerSocket temp = null;
 		try {
 			temp = new ServerSocket(ClientCommandProcessor.APP_SERVER_PORT);
@@ -31,6 +35,17 @@ public class ClientCommandProcessor implements Runnable{
 			System.out.println("Static variable error on ServerSocket:generalServerSocket");
 		}
 		generalServerSocket = temp;
+	}*/
+	
+	static {
+		SSLServerSocket temp = null;
+		try {
+			SSLServerSocketFactory sslServerSocketFactory = (SSLServerSocketFactory) SSLServerSocketFactory.getDefault();
+			temp = (SSLServerSocket) sslServerSocketFactory.createServerSocket(ClientCommandProcessor.APP_SERVER_PORT);
+		}catch(IOException e) {
+			System.out.println("Static variable error on SSLServerSocket:generalSSLServerSocket");
+		}
+		generalSSLServerSocket = temp;
 	}
 	
 	public ClientCommandProcessor() {
