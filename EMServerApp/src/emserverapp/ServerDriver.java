@@ -32,7 +32,9 @@ public class ServerDriver {
 						switch (input) {
 							case "n":
 								try {
-									startNetworkProgram();
+									System.out.print("Enter jks location (full path): ");
+									String location = scanner.nextLine();
+									startNetworkProgram(location);
 									System.out.println("Starting network program. If you selected other arguments, they will not be excuted until the network program is terminated.");
 								} catch (InterruptedException e) {
 									System.err.println("The network thread had a problem. Closing EM Server App.");
@@ -75,7 +77,9 @@ public class ServerDriver {
 				switch (input) {
 					case "n":
 						try {
-							startNetworkProgram();
+							System.out.print("Enter jks location (full path): ");
+							String location = scanner.nextLine();
+							startNetworkProgram(location);
 							System.out.println("Starting network program...");
 						} catch (InterruptedException e) {
 							System.err.println("The network thread had a problem. Closing EM Server App.");
@@ -149,12 +153,12 @@ public class ServerDriver {
 	*/
 	
 	
-	private static void startNetworkProgram() throws InterruptedException {
+	private static void startNetworkProgram(String jksLocation) throws InterruptedException {
 		//Prep system to use keystore/ssl
 		//Adds the Java Secure Socket Extension (JSSE) provider - provides SSL and TLS protocols with functionality for data encrpytion, server auth, message integrity, and client auth.
         Security.addProvider(new Provider());
 
-        System.setProperty("javax.net.ssl.keyStore", "emapp.jks");
+        System.setProperty("javax.net.ssl.keyStore", jksLocation);
         System.setProperty("javax.net.ssl.keyStorePassword", "18emapps**1997");
 		
 		ClientCommandProcessor ccp = new ClientCommandProcessor();

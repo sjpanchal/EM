@@ -32,7 +32,8 @@ public class ClientCommandProcessor implements Runnable{
 		try {
 			temp = new ServerSocket(ClientCommandProcessor.APP_SERVER_PORT);
 		}catch(IOException e) {
-			System.out.println("Static variable error on ServerSocket:generalServerSocket");
+			System.err.println("Static variable error on ServerSocket:generalServerSocket");
+			System.exit(1);
 		}
 		generalServerSocket = temp;
 	}*/
@@ -43,7 +44,8 @@ public class ClientCommandProcessor implements Runnable{
 			SSLServerSocketFactory sslServerSocketFactory = (SSLServerSocketFactory) SSLServerSocketFactory.getDefault();
 			temp = (SSLServerSocket) sslServerSocketFactory.createServerSocket(ClientCommandProcessor.APP_SERVER_PORT);
 		}catch(IOException e) {
-			System.out.println("Static variable error on SSLServerSocket:generalSSLServerSocket");
+			System.err.println("Static variable error on SSLServerSocket:generalSSLServerSocket");
+			System.exit(1);
 		}
 		generalSSLServerSocket = temp;
 	}
