@@ -205,7 +205,7 @@ public class User {
 			hashtext = "0" + hashtext;
 		}
 		
-		
+		System.err.println("USER PASS md5ed: " + hashtext);
 		return hashtext;
 	}
 }

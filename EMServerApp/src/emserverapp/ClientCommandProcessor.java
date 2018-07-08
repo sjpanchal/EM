@@ -66,11 +66,13 @@ public class ClientCommandProcessor implements Runnable{
 	@Override
 	public void run() {
 		System.out.println("new thread spawned");
+		ClientThread thisThread = (ClientThread) Thread.currentThread();
+		ClientConnection clientConnection;
 		Boolean terminate;
 		
 		//Create a new connection!
 		try {
-			ClientConnection clientConnection = new ClientConnection();
+			clientConnection = thisThread.getClientConnection();
 			clientConnection.writeToClient("g;s;b?Please login to continue.");
 			terminate = false;
 			
@@ -191,5 +193,9 @@ public class ClientCommandProcessor implements Runnable{
 			}
 		}
 		return "g:f:b?A serious error occured.";
+	}
+
+	public void disconnectFromDB() throws SQLException {
+		conn.close();		
 	}
 }
