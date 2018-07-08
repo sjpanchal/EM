@@ -26,8 +26,7 @@ public class ClientThread extends Thread {
 
 
 	public ClientConnection getClientConnection() throws IOException {
-		System.err.println("REQUESTING CONNECTION!*!");
-		if(clientConnection != null) {
+		if(clientConnection == null) {
 			clientConnection = new ClientConnection();
 			return clientConnection;
 		}

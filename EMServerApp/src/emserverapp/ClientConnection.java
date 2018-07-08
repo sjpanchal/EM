@@ -23,6 +23,7 @@ public class ClientConnection {
 	String name;
 	
 	public ClientConnection() throws IOException {
+		System.err.println("Trying to create new connection...");
 		/*generalServerSocket = ClientCommandProcessor.generalServerSocket;*/
 		generalSSLServerSocket = ClientCommandProcessor.generalSSLServerSocket;
 		generalSSLSocket = (SSLSocket) generalSSLServerSocket.accept();

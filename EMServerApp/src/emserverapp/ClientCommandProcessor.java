@@ -45,6 +45,7 @@ public class ClientCommandProcessor implements Runnable{
 			temp = (SSLServerSocket) sslServerSocketFactory.createServerSocket(ClientCommandProcessor.APP_SERVER_PORT);
 		}catch(IOException e) {
 			System.err.println("Static variable error on SSLServerSocket:generalSSLServerSocket");
+			e.printStackTrace();
 			System.exit(1);
 		}
 		generalSSLServerSocket = temp;
@@ -87,7 +88,7 @@ public class ClientCommandProcessor implements Runnable{
 		} catch (IOException e) {
 			System.err.println("Error when connecting/talking to client. Connection closed.");
 			terminate = true;
-			e.printStackTrace();
+			//e.printStackTrace();
 		} catch (SQLException e) {
 			System.err.println("Error with Database. Connection closed.");
 			terminate = true;

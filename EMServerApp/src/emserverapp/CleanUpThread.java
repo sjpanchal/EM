@@ -8,7 +8,8 @@ public class CleanUpThread extends Thread{
 	
 	public CleanUpThread(ClientCommandProcessor ccp, Thread[] clients)
 	{
-		
+		this.ccp = ccp;
+		this.clients = clients;
 	}
 	
 	public void killAllClientThreads() {

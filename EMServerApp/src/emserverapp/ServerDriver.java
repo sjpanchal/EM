@@ -166,10 +166,15 @@ public class ServerDriver {
 		//Add support for multiple clients in the future.
 		
 		//Connect a single client
-		ClientThread client1 = new ClientThread(ccp);
-		client1.start();
+		Thread[] clients = new Thread[1];
+		clients[0] = new ClientThread(ccp);
+		/*ClientThread client1 = new ClientThread(ccp);*/
+			
+		Runtime.getRuntime().addShutdownHook(new CleanUpThread(ccp, clients));
+				
 		
-		client1.join();
+		clients[0].start();
+		clients[0].join();
 	}
 	
 	
