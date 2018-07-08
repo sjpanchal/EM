@@ -144,7 +144,7 @@ public class ClientCommandProcessor implements Runnable{
 							}
 							
 							resultSet.next();
-							resultSet.getString(2);
+							System.out.println("PASS TO COMPARE" + resultSet.getString(2));
 							
 							if(!(subCommandSplit[2].equals(resultSet.getString(2)))) {
 								return "g;f;" + subCommandSplit[0] + "?" + subCommandSplit[1] + "?Couldn't login user, USER PASSWORD INCORRECT";

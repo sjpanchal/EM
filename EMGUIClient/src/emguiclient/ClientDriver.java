@@ -39,7 +39,7 @@ public class ClientDriver {
             System.setProperty("javax.net.ssl.trustStorePassword", "843emappusa13<\";");
 
             //Show details for handshake
-            System.setProperty("javax.net.debug", "all");
+            //System.setProperty("javax.net.debug", "all");
 			
             			
 			serverHost = InetAddress.getByName("em.racereg.run");
